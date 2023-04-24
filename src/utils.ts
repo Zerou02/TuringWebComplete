@@ -1,5 +1,13 @@
-export const firstLetterToUpper = (str: string) => {
-  let a = str.slice(0, 1).toUpperCase();
-  let b = str.slice(1, str.length);
-  return a + b;
+import { v4 as uuidv4 } from "uuid";
+import type { GraphicsData } from "./types";
+
+export const assignID = (): string => {
+  return uuidv4();
+};
+
+export const createDefaultGraphics = (): GraphicsData => {
+  return {
+    pos: { x: 0, y: 0 },
+    size: { x: 0, y: 0 },
+  };
 };

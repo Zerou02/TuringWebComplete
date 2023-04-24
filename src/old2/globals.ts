@@ -3,7 +3,7 @@ import { MouseManager } from "./MouseManager";
 
 export const ww = 800;
 export const wh = 600;
-export const pinSize = 16;
+export const pinSize = 32;
 export const gAssetsPath = "turing/";
 export const gCableDrawer = new CableDrawer();
 export const gMouseManager = new MouseManager();

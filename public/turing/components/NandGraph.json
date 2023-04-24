@@ -1,0 +1,45 @@
+[
+  {
+    "type": "nand",
+    "components": [
+      {
+        "type": "pin",
+        "id": "nin1",
+        "edge": ["nedge1"],
+        "op": "through"
+      },
+      { "type": "pin", "id": "nin2", "edge": ["nedge2"], "op": "through" },
+      {
+        "type": "pin",
+        "id": "nout1",
+        "edge": ["nedge1", "nedge2"],
+        "op": "nand"
+      }
+    ],
+    "edges": [{ "nedge1": ["nin1", "nout1"] }, { "nedge2": ["nin2", "nout1"] }]
+  },
+
+  {
+    "type": "not",
+    "components": [
+      {
+        "type": "pin",
+        "id": "nin1",
+        "edge": ["nedge1", "nedge2"],
+        "op": "through"
+      },
+      {
+        "type": "nand",
+        "id": "nand1",
+        "edges": [["nedge1"], ["nedge2"], ["nedge3"]]
+      },
+      {
+        "type": "pin",
+        "id": "nout1",
+        "edge": ["nedge3"],
+        "op": "end"
+      }
+    ],
+    "edges": ["..."]
+  }
+]

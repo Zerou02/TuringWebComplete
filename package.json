@@ -22,6 +22,7 @@
     "class-transformer": "^0.5.1",
     "cycle": "^1.0.3",
     "pixi.js": "^7.2.4",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "uuid": "^9.0.0"
   }
 }

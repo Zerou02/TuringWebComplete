@@ -1,0 +1,14 @@
+{
+  "in": [{ "id": "in1", "connectedNodes": ["nin1", "nin2"] }],
+  "out": [{ "id": "out1", "connectedNodes": ["nout1"] }],
+  "components": [
+    {
+      "type": "nand",
+      "inNodes": [
+        { "id": "nin1", "connectedNodes": ["in1"] },
+        { "id": "nin2", "connectedNodes": ["in1"] }
+      ],
+      "outNodes": [{ "id": "nout1", "connectedNodes": ["out1"] }]
+    }
+  ]
+}
