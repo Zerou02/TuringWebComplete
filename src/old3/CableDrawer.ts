@@ -5,8 +5,16 @@ export class CableDrawer {
   firstPin: Pin;
   constructor() {
     window.addEventListener("mouseup", (e) => {
-      this.isCableDrawn = false;
-      this.firstPin = null;
+      this.removePin();
     });
+  }
+
+  setPin(pin: Pin) {
+    this.firstPin = pin;
+  }
+
+  removePin() {
+    this.isCableDrawn = false;
+    this.firstPin = null;
   }
 }

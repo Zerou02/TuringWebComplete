@@ -1,5 +1,5 @@
 import { Sprite, Texture, Container, Point } from "pixi.js";
-import type { Nand } from "./Nand_old";
+import type { Nand } from "./NandDisplay";
 import { gCableDrawer, pinSize } from "../globals";
 import { offBtnTx, onBtnTx } from "../textures";
 import { firstLetterToUpper } from "../utils";

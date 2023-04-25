@@ -2,7 +2,6 @@ import type { Component } from "./Component";
 import { createNand } from "./components";
 
 type cases = boolean[][];
-// TODO: Fix tests
 export const testNand = () => {
   let nand = createNand();
   let cases = [

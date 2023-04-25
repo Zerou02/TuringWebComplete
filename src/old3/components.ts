@@ -1,19 +1,19 @@
 import { Component } from "./Component";
-import { uCreateEdge } from "./Edges";
+import { Edge } from "./Connections";
 import { Pin } from "./Pin";
 
 export const createNand = (): Component => {
-  let nin1 = new Pin("through", false);
-  let nin2 = new Pin("through", false);
-  let nout1 = new Pin("nand", true);
-  let edge1 = uCreateEdge(nin1, nout1);
-  let edge2 = uCreateEdge(nin2, nout1);
+  let nin1 = new Pin("through", false, "in");
+  let nin2 = new Pin("through", false, "in");
+  let nout1 = new Pin("nand", true, "out");
+  new Edge(nin1, nout1, true);
+  new Edge(nin2, nout1, true);
   let nand = new Component([], [nin1, nin2], [nout1], "nand", null);
   return nand;
 };
 
 export const createLvlIn = (): Component => {
-  let out = new Pin("through", true);
+  let out = new Pin("through", true, "out");
   return new Component([], [], [out], "lvlIn", null);
 };
 

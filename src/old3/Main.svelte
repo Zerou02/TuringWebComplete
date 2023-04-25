@@ -49,4 +49,6 @@
     e.update();
     c.update();
   });
+
+  console.log(nand);
 </script>
