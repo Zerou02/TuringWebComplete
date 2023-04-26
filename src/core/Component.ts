@@ -1,7 +1,7 @@
-import type { ComponentDisplay } from "./ComponentDisplay";
+import type { Display } from "../graphics/Display";
+import type { Coordinate2, ComponentTypes } from "../utils/types";
+import { assignID, areArraysEqual } from "../utils/utils";
 import type { Pin } from "./Pin";
-import type { Coordinate2 } from "./types";
-import { areArraysEqual, assignID } from "./utils";
 
 export class Component {
   inNodes: Pin[] = [];
@@ -9,15 +9,16 @@ export class Component {
 
   position: Coordinate2 = { x: 0, y: 0 };
   id: number;
+  type: ComponentTypes;
+  display: Display;
 
-  display: ComponentDisplay;
-
-  constructor() {
+  constructor(type: ComponentTypes) {
     this.id = assignID();
+    this.type = type;
   }
 
   calcNewOutVals(): boolean[] {
-    console.error("Abstract");
+    console.error("Abstract new out vals");
     return [];
   }
 
@@ -37,9 +38,8 @@ export class Component {
     }
   }
 
-  onPinUpdate(pin: Pin): void {
+  onPinUpdate(): void {
     this.uEval();
-    if (this.display) this.display.update();
   }
 
   uSetPinState(pinType: "in" | "out", pinName: number, val: boolean) {

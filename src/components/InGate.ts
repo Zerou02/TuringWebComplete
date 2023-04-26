@@ -1,9 +1,9 @@
-import { Component } from "./Component";
-import { Pin } from "./Pin";
+import { Component } from "../core/Component";
+import { Pin } from "../core/Pin";
 
 export class InGate extends Component {
   constructor() {
-    super();
+    super("inGate");
     this.outNodes.push(new Pin(true, "Out", 0, this));
   }
 }

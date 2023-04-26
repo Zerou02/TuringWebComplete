@@ -1,14 +1,40 @@
 {
-  "in": [{ "id": "in1", "connectedNodes": ["nin1", "nin2"] }],
-  "out": [{ "id": "out1", "connectedNodes": ["nout1"] }],
-  "components": [
+  "name": "not",
+  "comps": [
     {
-      "type": "nand",
-      "inNodes": [
-        { "id": "nin1", "connectedNodes": ["in1"] },
-        { "id": "nin2", "connectedNodes": ["in1"] }
-      ],
-      "outNodes": [{ "id": "nout1", "connectedNodes": ["out1"] }]
+      "id": "nand",
+      "type": "nand"
+    },
+    {
+      "id": "in",
+      "type": "lvlIn"
+    },
+    { "id": "out", "type": "lvlOut" }
+  ],
+  "cons": [
+    {
+      "comp1": "nand",
+      "type1": "in",
+      "nr1": 0,
+      "comp2": "in",
+      "type2": "out",
+      "nr2": 0
+    },
+    {
+      "comp1": "nand",
+      "type1": "in",
+      "nr1": 1,
+      "comp2": "in",
+      "type2": "out",
+      "nr2": 0
+    },
+    {
+      "comp1": "nand",
+      "type1": "out",
+      "nr1": 0,
+      "comp2": "out",
+      "type2": "in",
+      "nr2": 0
     }
   ]
 }

@@ -1,6 +1,6 @@
-import type { Pin } from "./Pin";
-import { offBtnTx, onBtnTx } from "./textures";
+import type { Pin } from "../core/Pin";
 import { v4 as uuidv4 } from "uuid";
+import { onBtnTx, offBtnTx } from "./globals";
 export const firstLetterToUpper = (str: string) => {
   let a = str.slice(0, 1).toUpperCase();
   let b = str.slice(1, str.length);

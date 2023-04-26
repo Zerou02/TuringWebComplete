@@ -1,6 +1,6 @@
+import type { Coordinate2 } from "../utils/types";
+import { assignID } from "../utils/utils";
 import type { Component } from "./Component";
-import type { Coordinate2 } from "./types";
-import { assignID } from "./utils";
 
 export class Pin {
   type: "In" | "Out";
@@ -11,11 +11,13 @@ export class Pin {
   position: Coordinate2;
   connectedNodes: Pin[] = [];
 
+  toggleable: boolean = false;
   constructor(
     state: boolean,
     type: "In" | "Out",
     name: string | number,
-    component: Component
+    component: Component,
+    toggleable = false
   ) {
     this.name = name;
     this.state = state;
@@ -23,12 +25,13 @@ export class Pin {
     this.type = type;
     this.position = { x: 0, y: 0 };
     this.id = assignID();
+    this.toggleable = toggleable;
   }
 
   setState(val: boolean) {
     if (this.state !== val) {
       this.state = val;
-      this.component.onPinUpdate(this);
+      this.component.onPinUpdate();
     }
   }
 
