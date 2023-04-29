@@ -1,0 +1,46 @@
+{
+  "comps": [
+    {
+      "id": "6c2b600a-a39f-4ddf-a92d-054bcc22545f",
+      "type": "nand",
+      "name": "nand"
+    },
+    {
+      "id": "cc05754e-340a-44fd-aea3-ec4b25a84305",
+      "type": "lvlIn",
+      "name": "lvlIn"
+    },
+    {
+      "id": "81a245ac-bd65-4827-99ba-be5fca62bf95",
+      "type": "lvlOut",
+      "name": "lvlOut"
+    }
+  ],
+  "cons": [
+    {
+      "comp1": "6c2b600a-a39f-4ddf-a92d-054bcc22545f",
+      "type1": "Out",
+      "nr1": 0,
+      "comp2": "81a245ac-bd65-4827-99ba-be5fca62bf95",
+      "type2": "In",
+      "nr2": 0
+    },
+    {
+      "comp1": "cc05754e-340a-44fd-aea3-ec4b25a84305",
+      "type1": "Out",
+      "nr1": 0,
+      "comp2": "6c2b600a-a39f-4ddf-a92d-054bcc22545f",
+      "type2": "In",
+      "nr2": 0
+    },
+    {
+      "comp1": "cc05754e-340a-44fd-aea3-ec4b25a84305",
+      "type1": "Out",
+      "nr1": 0,
+      "comp2": "6c2b600a-a39f-4ddf-a92d-054bcc22545f",
+      "type2": "In",
+      "nr2": 1
+    }
+  ],
+  "name": "not2"
+}

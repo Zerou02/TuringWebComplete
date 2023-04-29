@@ -3,19 +3,20 @@ export interface Coordinate2 {
   y: number;
 }
 
-export type ComponentTypes = "nand" | "inGate" | "lvlIn" | "lvlOut" | string;
+export type ComponentTypes = "nand" | "inGate" | "lvlIn" | "lvlOut" | "custom";
 
 export interface SaveComp {
   id: string;
+  name?: string;
   type: ComponentTypes;
 }
 
 export interface SaveCon {
-  comp1: ComponentTypes;
-  type1: "in" | "out";
+  comp1: string;
+  type1: "In" | "Out";
   nr1: number;
-  comp2: ComponentTypes;
-  type2: "in" | "out";
+  comp2: string;
+  type2: "In" | "Out";
   nr2: number;
 }
 export interface Save {

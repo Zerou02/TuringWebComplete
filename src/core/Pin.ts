@@ -11,13 +11,15 @@ export class Pin {
   position: Coordinate2;
   connectedNodes: Pin[] = [];
 
-  toggleable: boolean = false;
+  toggleable: boolean;
+  clickable: boolean;
   constructor(
     state: boolean,
     type: "In" | "Out",
     name: string | number,
     component: Component,
-    toggleable = false
+    toggleable = false,
+    clickable = true
   ) {
     this.name = name;
     this.state = state;
@@ -26,6 +28,7 @@ export class Pin {
     this.position = { x: 0, y: 0 };
     this.id = assignID();
     this.toggleable = toggleable;
+    this.clickable = clickable;
   }
 
   setState(val: boolean) {

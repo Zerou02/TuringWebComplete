@@ -106,7 +106,7 @@ export class Display {
 
   createDisplay() {
     this.componentContainer = new Container();
-    this.bodySprite = Sprite.from(gAssetsPath + this.component.type + ".png");
+    this.bodySprite = Sprite.from(gAssetsPath + this.component.name + ".png");
     this.bodySprite.width = pinSize * 2;
     this.bodySprite.height = pinSize * 2;
     this.bodySprite.x = pinSize / 2;
@@ -129,6 +129,7 @@ export class Display {
   }
 
   pointerUpListener = (e: MouseEvent, pin: Pin) => {
+    if (!pin.clickable) return;
     if (e.button === leftButton) {
       pin.connectToPin(gCableDrawer.firstPin);
     }
@@ -136,10 +137,10 @@ export class Display {
   };
 
   pointerDownListener = (e: MouseEvent, pin: Pin) => {
-    if (e.button === leftButton) {
+    if (e.button === leftButton && pin.clickable) {
       gCableDrawer.isCableDrawn = true;
       gCableDrawer.firstPin = pin;
-    } else if (e.button === rightButton) {
+    } else if (e.button === rightButton && pin.clickable) {
       gCableDrawer.isCableDrawn = false;
       gCableDrawer.firstPin = null;
       if (pin.type === "Out") {

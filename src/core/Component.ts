@@ -10,11 +10,13 @@ export class Component {
   position: Coordinate2 = { x: 0, y: 0 };
   id: number;
   type: ComponentTypes;
+  name: string;
   display: Display;
 
   constructor(type: ComponentTypes) {
     this.id = assignID();
     this.type = type;
+    if (type !== "custom") this.name = type;
   }
 
   calcNewOutVals(): boolean[] {

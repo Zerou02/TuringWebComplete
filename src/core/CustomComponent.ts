@@ -4,7 +4,8 @@ export class CustomComponent extends Component {
   comps: Component[] = [];
 
   constructor(name: string) {
-    super(name);
+    super("custom");
+    this.name = name;
   }
 
   addComponent(component: Component) {

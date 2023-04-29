@@ -15,3 +15,4 @@ export const rightButton = 2;
 
 export const offBtnTx = Texture.from(gAssetsPath + "pin_off.png");
 export const onBtnTx = Texture.from(gAssetsPath + "pin_on.png");
+export const gCmpStrgPth = "comps";
