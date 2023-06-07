@@ -2,8 +2,8 @@ import { Texture } from "pixi.js";
 import { CableDrawer } from "../core/CableDrawer";
 import { MouseManager } from "../core/MouseManager";
 
-export const ww = 800;
-export const wh = 600;
+export const ww = 1920 / 1.5;
+export const wh = 1080 / 1.5;
 export const pinSize = 32;
 
 export const gAssetsPath = "turing/";

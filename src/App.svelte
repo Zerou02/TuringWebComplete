@@ -14,6 +14,7 @@
   import { StorageManager } from "./core/StorageManager";
   import { getComponent } from "./components/aNotGood";
   import type { ComponentTypes } from "./utils/types";
+  import EditorComp from "./uiComps/EditorComp.svelte";
 
   let app = new Pixi.Application({
     width: ww,
@@ -46,6 +47,7 @@
   let regularTypes: ComponentTypes[] = ["nand", "inGate"];
 </script>
 
+<EditorComp {editor} />
 <div style="position: absolute; top:600px">
   <div>
     <button on:click={(e) => editor.addComponent(new LvlInputEditor())}
@@ -60,6 +62,7 @@
       >
     {/each}
   </div>
+  <br />
   <div>
     <input
       type="text"
@@ -85,6 +88,7 @@
     >
     <br />
     <span style="color: red;">{errorMessage}</span>
+    <br />
   </div>
   {#if storageManager.components}
     {#each Object.entries(storageManager.components) as [key, value]}

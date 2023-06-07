@@ -53,6 +53,24 @@ export class Pin {
     }
   };
 
+  removeAllConnections() {
+    if (this.type === "Out") {
+      this.connectedNodes.forEach((x) => {
+        if (x.getAmountOnConnections() <= 1) {
+          x.setState(false);
+        }
+        this.connectedNodes.forEach((y) => {
+          y.removePin(this);
+        });
+        this.connectedNodes = [];
+      });
+    } else {
+      this.connectedNodes.forEach((y) => y.removePin(this));
+      this.connectedNodes = [];
+      this.setState(false);
+    }
+  }
+
   connectToPin(otherPin: Pin) {
     if (this.type === otherPin.type) {
       return;

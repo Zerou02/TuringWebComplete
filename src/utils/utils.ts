@@ -1,6 +1,7 @@
 import type { Pin } from "../core/Pin";
 import { v4 as uuidv4 } from "uuid";
 import { onBtnTx, offBtnTx } from "./globals";
+import type { Container } from "pixi.js";
 
 export const firstLetterToUpper = (str: string) => {
   let a = str.slice(0, 1).toUpperCase();
@@ -33,4 +34,11 @@ export const areArraysEqual = (arr1: boolean[], arr2: boolean[]) => {
     }
   });
   return isEqual;
+};
+
+export const removeSpecificChildFromContainer = (
+  container: Container,
+  child: Container
+) => {
+  container.removeChildAt(container.getChildIndex(child));
 };

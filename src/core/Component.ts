@@ -52,4 +52,9 @@ export class Component {
     this[pinType + "Nodes"][pinName].setState(val);
     this.display.update();
   }
+
+  removeAllConnections() {
+    this.inNodes.forEach((y) => y.removeAllConnections());
+    this.outNodes.forEach((x) => x.removeAllConnections());
+  }
 }

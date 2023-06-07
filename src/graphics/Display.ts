@@ -119,11 +119,10 @@ export class Display {
     this.componentContainer = new Container();
 
     const textSyle = new TextStyle({
-      fontSize: 10,
+      fontSize: 15,
+      fill: "white",
     });
     let text = new Text(this.component.name, textSyle);
-
-    text.y += 2;
 
     this.bodySprite = Sprite.from(gAssetsPath + "template" + ".png");
     this.bodySprite.width = pinSize * 2;
@@ -142,8 +141,11 @@ export class Display {
       this.outPinSprites.push(pinSprite);
     });
 
-    this.bodySprite.addChild(text);
     this.componentContainer.addChild(this.bodySprite);
+    this.componentContainer.addChild(text);
+    //TODO: Centre better
+    text.x += this.componentContainer.width / 2.5;
+    text.y += this.componentContainer.height / 2.65;
 
     this.stage.addChild(this.componentContainer);
   }
@@ -178,20 +180,7 @@ export class Display {
     } else if (e.button === rightButton && pin.clickable) {
       gCableDrawer.isCableDrawn = false;
       gCableDrawer.firstPin = null;
-      if (pin.type === "Out") {
-        pin.connectedNodes.forEach((x) => {
-          if (x.getAmountOnConnections() <= 1) {
-            x.setState(false);
-          }
-          pin.connectedNodes.forEach((y) => {
-            y.removePin(pin);
-          });
-          pin.connectedNodes = [];
-        });
-      } else {
-        pin.connectedNodes = [];
-        pin.setState(false);
-      }
+      pin.removeAllConnections();
     }
   };
 
