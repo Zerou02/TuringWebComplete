@@ -5,7 +5,7 @@ export interface Coordinate2 {
 
 export type ComponentTypes = "nand" | "inGate" | "lvlIn" | "lvlOut" | "custom";
 
-export interface SaveComp {
+/* export interface SaveComp {
   id: string;
   name?: string;
   type: ComponentTypes;
@@ -23,4 +23,25 @@ export interface Save {
   name: string;
   comps: SaveComp[];
   cons: SaveCon[];
+} */
+
+export interface MiddleComp {
+  type: ComponentTypes;
+  id: string;
+  name: string;
+}
+
+export interface SaveCon {
+  in: string;
+  out: string;
+}
+
+export interface Save {
+  id: string;
+  comps: {
+    ins: number;
+    middles: MiddleComp[];
+    outs: number;
+  };
+  conns: SaveCon[];
 }

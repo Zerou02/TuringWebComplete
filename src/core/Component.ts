@@ -12,11 +12,15 @@ export class Component {
   type: ComponentTypes;
   name: string;
   display: Display;
+  topLevelComponent: Component;
 
   constructor(type: ComponentTypes) {
     this.id = assignID();
     this.type = type;
-    if (type !== "custom") this.name = type;
+    this.topLevelComponent = this;
+    if (type !== "custom") {
+      this.name = type;
+    }
   }
 
   calcNewOutVals(): boolean[] {

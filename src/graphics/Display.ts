@@ -1,6 +1,7 @@
 import {
   gAssetsPath,
   gCableDrawer,
+  gMouseManager,
   leftButton,
   middleBtn,
   pinSize,
@@ -8,7 +9,15 @@ import {
 } from "../utils/globals";
 import { PinDspl } from "./PinDspl";
 import type { Pin } from "../core/Pin";
-import { Container, Graphics, Sprite, Point } from "pixi.js";
+import {
+  Container,
+  Graphics,
+  Sprite,
+  Point,
+  Text,
+  TextStyle,
+  SCALE_MODES,
+} from "pixi.js";
 import { Vector2 } from "../utils/Vector2";
 import type { Component } from "../core/Component";
 import { getBtnTx } from "../utils/utils";
@@ -77,10 +86,12 @@ export class Display {
     document.addEventListener("mousemove", this.dragListener);
     this.bodySprite.on("mousedown", (e) => {
       this.isDragging = true;
+      gMouseManager.setHeldComponent(this.component);
       let gNcPos = this.componentContainer.toGlobal(new Point(0, 0));
       this.dragOffset = new Vector2(e.x - gNcPos.x, e.y - gNcPos.y);
     });
     this.bodySprite.on("mouseup", (e) => {
+      gMouseManager.currentlyHeldComponent = null;
       this.isDragging = false;
     });
   }
@@ -106,7 +117,15 @@ export class Display {
 
   createDisplay() {
     this.componentContainer = new Container();
-    this.bodySprite = Sprite.from(gAssetsPath + this.component.name + ".png");
+
+    const textSyle = new TextStyle({
+      fontSize: 10,
+    });
+    let text = new Text(this.component.name, textSyle);
+
+    text.y += 2;
+
+    this.bodySprite = Sprite.from(gAssetsPath + "template" + ".png");
     this.bodySprite.width = pinSize * 2;
     this.bodySprite.height = pinSize * 2;
     this.bodySprite.x = pinSize / 2;
@@ -123,6 +142,7 @@ export class Display {
       this.outPinSprites.push(pinSprite);
     });
 
+    this.bodySprite.addChild(text);
     this.componentContainer.addChild(this.bodySprite);
 
     this.stage.addChild(this.componentContainer);
@@ -137,9 +157,24 @@ export class Display {
   };
 
   pointerDownListener = (e: MouseEvent, pin: Pin) => {
-    if (e.button === leftButton && pin.clickable) {
-      gCableDrawer.isCableDrawn = true;
-      gCableDrawer.firstPin = pin;
+    if (e.button === leftButton) {
+      if (pin.clickable) {
+        gCableDrawer.isCableDrawn = true;
+        gCableDrawer.firstPin = pin;
+      }
+      if (pin.toggleable) {
+        let newVal = !pin.state;
+        pin.setState(newVal);
+        if (newVal === true) {
+          pin.connectedNodes.forEach((x) => x.setState(true));
+        } else {
+          pin.connectedNodes.forEach((x) => {
+            if (x.getAmountOnConnections() <= 1) {
+              x.setState(false);
+            }
+          });
+        }
+      }
     } else if (e.button === rightButton && pin.clickable) {
       gCableDrawer.isCableDrawn = false;
       gCableDrawer.firstPin = null;
@@ -156,19 +191,6 @@ export class Display {
       } else {
         pin.connectedNodes = [];
         pin.setState(false);
-      }
-    } else if (e.button === middleBtn && pin.toggleable) {
-      e.preventDefault();
-      let newVal = !pin.state;
-      pin.setState(newVal);
-      if (newVal === true) {
-        pin.connectedNodes.forEach((x) => x.setState(true));
-      } else {
-        pin.connectedNodes.forEach((x) => {
-          if (x.getAmountOnConnections() <= 1) {
-            x.setState(false);
-          }
-        });
       }
     }
   };

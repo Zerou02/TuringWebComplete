@@ -1,4 +1,5 @@
 import type { Component } from "../core/Component";
+import { SaveLoader } from "../core/SaveLoader";
 import type { ComponentTypes } from "../utils/types";
 import { InGate } from "./InGate";
 import { LvlInput } from "./LvlInput";

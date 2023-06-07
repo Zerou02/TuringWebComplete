@@ -14,6 +14,7 @@ export class CustomComponent extends Component {
     } else if (component.type === "lvlOut") {
       this.outNodes.push(component.outNodes[0]);
     }
+    component.topLevelComponent = this;
     this.comps.push(component);
   }
 }

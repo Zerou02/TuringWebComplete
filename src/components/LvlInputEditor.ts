@@ -5,7 +5,7 @@ export class LvlInputEditor extends Component {
   constructor() {
     super("lvlIn");
     this.outNodes.push(new Pin(false, "Out", 0, this));
-    this.inNodes.push(new Pin(false, "In", 0, this, true, true));
+    this.inNodes.push(new Pin(false, "In", 0, this, true, false));
   }
 
   calcNewOutVals(): boolean[] {

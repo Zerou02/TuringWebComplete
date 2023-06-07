@@ -4,6 +4,7 @@ import { SaveLoader } from "./SaveLoader";
 import { gCableDrawer, gMouseManager } from "../utils/globals";
 import type { Component } from "./Component";
 import type { Save } from "../utils/types";
+import type { StorageManager } from "./StorageManager";
 
 export class Editor {
   stage: Container;
@@ -11,12 +12,19 @@ export class Editor {
   graphics: Graphics;
   displays: Display[] = [];
   saveLoader: SaveLoader;
+  storageMgr: StorageManager;
   comps: Component[] = [];
-  constructor(stage: Container, ticker: Ticker, graphics: Graphics) {
+  constructor(
+    stage: Container,
+    ticker: Ticker,
+    graphics: Graphics,
+    storageMgr: StorageManager
+  ) {
     this.stage = stage;
     this.ticker = ticker;
     this.graphics = graphics;
-    this.saveLoader = new SaveLoader();
+    this.saveLoader = new SaveLoader(storageMgr);
+    this.storageMgr = storageMgr;
 
     this.ticker.add((delta) => {
       graphics.clear();
@@ -33,8 +41,6 @@ export class Editor {
   }
 
   load(save: Save) {
-    console.log("sdsafa", JSON.stringify(save));
-
     this.addComponent(this.saveLoader.load(save));
   }
 
@@ -50,6 +56,20 @@ export class Editor {
   }
 
   save(name: string) {
-    return this.saveLoader.saveComponent(name, this.comps);
+    this.storageMgr.addComponent(
+      name,
+      this.saveLoader.createSave(name, this.comps)
+    );
+  }
+
+  removeComponent(component: Component) {
+    let displayComp = this.displays.find(
+      (x) => x.component.id === component.id
+    );
+    this.stage.removeChildAt(
+      this.stage.getChildIndex(displayComp.componentContainer)
+    );
+    this.displays = this.displays.filter((x) => x.component.id != component.id);
+    this.comps = this.comps.filter((x) => x.id !== component.id);
   }
 }
